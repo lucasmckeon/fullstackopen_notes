@@ -55,12 +55,12 @@ app.put('/api/notes/:id', (request,response,next)=>{
     content: body.content,
     important: body.important,
   }
-  Note.findByIdAndUpdate(id,note,{new:true}).then(updatedNote => {
+  Note.findByIdAndUpdate(id,note,{new:true,runValidators:true,context:'query'}).then(updatedNote => {
     response.json(updatedNote)
   }).catch(error => next(error))
 })
 
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response,next) => {
   const body = request.body
   if (!body.content) {
     return response.status(400).json({ 
@@ -73,13 +73,15 @@ app.post('/api/notes', (request, response) => {
   })
   note.save().then(savedNote => {
     response.json(savedNote)
-  })
+  }).catch(error=>next(error))
 })
 
 const errorHandler = (error,request,response,next) => {
   console.error(error.message)
   if(error.name === 'CastError'){
     return response.status(400).send({error:'malformatted id'})
+  } else if( error.name === 'ValidationError' ){
+    return response.status(400).json({error:error.message})
   }
   next(error)
 }
