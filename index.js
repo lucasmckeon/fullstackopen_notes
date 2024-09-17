@@ -1,34 +1,33 @@
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
-const cors = require('cors')
-const Note = require('./models/note');
+const Note = require('./models/note')
 
 const app = express()
 app.use(express.json())
 app.use(morgan('tiny'))
 app.use(express.static('dist'))
 
-app.get('/',(request,response)=> {
+app.get('/',(request,response) => {
   response.send('<h1>Hello Worldss!</h1>')
 })
 
 app.get('/api/notes', (request, response) => {
-  Note.find({}).then(notes=>{
+  Note.find({}).then(notes => {
     response.json(notes)
   })
 })
 
-app.get('/api/notes/:id',(request,response,next)=>{
+app.get('/api/notes/:id',( request,response,next ) => {
   const id = request.params.id
-  Note.findById(id).then(note =>{
+  Note.findById(id).then(note => {
     if(note === null){
-      response.statusMessage="Resource not found"
+      response.statusMessage='Resource not found'
       response.status(404).end()
       return
     }
     response.json(note)
-  }).catch(error=>{
+  }).catch(error => {
     console.log(error)
     next(error)
     //response.status(400).send({error:'malformatted id'})

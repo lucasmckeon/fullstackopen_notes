@@ -1,12 +1,14 @@
 const mongoose = require('mongoose')
+
 mongoose.set('strictQuery', false)
-const url = process.env.MONGODB_URI
+const url = process.env.MONGODB_URI || '**NO ENV URL PROVIDED**'
 console.log('connecting to', url)
 mongoose.connect(url)
-  .then(result => {
+  .then((result) => {
     console.log('connected to MongoDB')
   })
   .catch(error => {
+    console.log('hello')
     console.log('error connecting to MongoDB:', error.message)
   })
 
