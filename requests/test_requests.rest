@@ -17,8 +17,19 @@ POST http://localhost:3001/api/notes
 content-type:application/json
 
 {
-  "content":"lol",
-  "important":true
+  "content":"Long text here",
+  "important":true,
+  "userId":"66f21da3c1630812450c76d4"
+}
+
+###
+POST http://localhost:3001/api/notes 
+content-type:application/json
+
+{
+  "content":"Another text here",
+  "important":true,
+  "userId":"66f21da3c1630812450c76d4"
 }
 
 ###
@@ -29,4 +40,14 @@ content-type:application/json
 {
   "content":"This is a test note",
   "important":true
+}
+
+###
+POST http://localhost:3001/api/users 
+content-type:application/json
+
+{
+  "username":"Test",
+  "name":"Test",
+  "password":"Test"
 }
