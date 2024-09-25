@@ -51,3 +51,22 @@ content-type:application/json
   "name":"Test",
   "password":"Test"
 }
+
+###
+POST http://localhost:3001/api/login
+content-type:application/json
+
+{
+  "username":"Test",
+  "password":"Test"
+}
+
+###
+POST http://localhost:3001/api/notes 
+content-type:application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJpZCI6IjY2ZjIxZGEzYzE2MzA4MTI0NTBjNzZkNCIsImlhdCI6MTcyNzIyMzExNn0.o6EeGpF74Ps4Mf8BILBelQnT_AEVBZaOvkbB_7jHob4
+
+{
+  "content":"Another text here auth",
+  "important":true
+}
